@@ -27,6 +27,7 @@ jobs:
         retention-days: 30
   deploy:
     needs: test
+    if: always()
     permissions:
       pages: write
       id-token: write
