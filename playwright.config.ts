@@ -13,7 +13,9 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: process.env.CI ? [['github'], ['html']] : 'html',
+  reporter: process.env.CI
+    ? [['github'], ['html', { outputFile: 'github-pages' }]]
+    : 'html',
   timeout: 180000,
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
