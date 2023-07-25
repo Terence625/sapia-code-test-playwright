@@ -36,7 +36,7 @@ jobs:
       uses: actions/upload-pages-artifact@v2
       with:
       # Upload entire repository
-        path: playwright-report/
+        path: ./playwright-report
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v2
