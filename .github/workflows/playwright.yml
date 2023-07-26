@@ -13,12 +13,21 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+      # Upload entire repository
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
   deploy:
     needs: test
     if: always()
@@ -30,15 +39,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-    - name: Setup Pages
-      uses: actions/configure-pages@v3
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v2
-      with:
-      # Upload entire repository
-        name: github-pages
-        path: playwright-report/
-        retention-days: 30
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v2
