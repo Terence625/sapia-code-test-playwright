@@ -168,4 +168,25 @@ export const step_share_feedback = async (
   })
 }
 
-// export const step_
+export const step_verify_alert_popup_and_edit = async (
+  aiChatbotPage: AiChatbotPage,
+  alertMessage: string,
+  previousAnswer: string,
+  editAnswer: string
+) => {
+  await test.step('I verify the alert popup and edit', async () => {
+    await aiChatbotPage.verifyAlertPopup(alertMessage)
+    await aiChatbotPage.edit(previousAnswer, editAnswer)
+  })
+}
+
+export const step_verify_alert_popup_and_continue = async (
+  aiChatbotPage: AiChatbotPage,
+  alertMessage: string,
+  previousAnswer: string
+) => {
+  await test.step('I verify the alert popup and edit', async () => {
+    await aiChatbotPage.verifyAlertPopup(alertMessage)
+    await aiChatbotPage.continue(previousAnswer)
+  })
+}

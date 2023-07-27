@@ -33,7 +33,9 @@ const personalAnswers = {
 
 const feedback = 'This is a feedback.'
 
-const behaviouralAnswerLessThan50Words = 'answer1 '.repeat(49)
+const behaviouralAnswerLessThan50Words = 'answer '.repeat(49)
+const behaviouralAnswerMoreThan50Words = 'answer '.repeat(50)
+const behaviouralAnswerMoreThan150Words = 'answer '.repeat(151)
 
 test.describe('ai interview chatbot', () => {
   test("I'm a candidate and complete an interview", async ({
@@ -52,7 +54,7 @@ test.describe('ai interview chatbot', () => {
     await aiChatbotStep.step_share_feedback(aiChatbotPage, feedback)
   })
 
-  test("I'm a candidate and answer the first behavioural question with less than 50 words", async ({
+  test("I'm a candidate and answer the first behavioural question with less than 50 words, then edit", async ({
     aiChatbotPage,
   }) => {
     await aiChatbotStep.step_input_my_personal_info(aiChatbotPage, personalInfo)
@@ -60,6 +62,28 @@ test.describe('ai interview chatbot', () => {
       aiChatbotPage,
       behaviouralAnswerLessThan50Words,
       { isFail: true }
+    )
+    await aiChatbotStep.step_verify_alert_popup_and_edit(
+      aiChatbotPage,
+      'You’ve entered less than the recommended 50 words',
+      behaviouralAnswerLessThan50Words,
+      behaviouralAnswerMoreThan50Words
+    )
+  })
+
+  test("I'm a candidate and answer the first behavioural question with more than 150 words, then continue", async ({
+    aiChatbotPage,
+  }) => {
+    await aiChatbotStep.step_input_my_personal_info(aiChatbotPage, personalInfo)
+    await aiChatbotStep.step_answer_first_behaviouralQuestion(
+      aiChatbotPage,
+      behaviouralAnswerMoreThan150Words,
+      { isFail: true }
+    )
+    await aiChatbotStep.step_verify_alert_popup_and_continue(
+      aiChatbotPage,
+      'You’ve entered more than the recommended 150 words',
+      behaviouralAnswerMoreThan150Words
     )
   })
 })

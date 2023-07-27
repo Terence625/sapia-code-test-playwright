@@ -93,4 +93,27 @@ export class AiChatbotPage {
     await this.page.getByRole('button', { name: 'SUBMIT RATING' }).click()
     await this.waitForTyping()
   }
+
+  async verifyAlertPopup(message: string) {
+    await expect(this.page.getByText(message)).toBeVisible()
+    await expect(this.page.locator('.ant-modal-content')).toHaveScreenshot(
+      `${message}.png`
+    )
+  }
+
+  async edit(previousAnswer: string, editAnswer: string) {
+    await this.page.getByRole('button', { name: 'EDIT' }).click()
+    await expect(this.textEditor).toHaveText(previousAnswer)
+    await this.textEditor.clear()
+    await this.textEditor.fill(editAnswer)
+    await this.sendButton.click()
+    await this.verifyLastText(editAnswer)
+    await this.waitForTyping()
+  }
+
+  async continue(previousAnswer: string){
+    await this.page.getByRole('button', { name: 'CONTINUE' }).click()
+    await this.verifyLastText(previousAnswer)
+    await this.waitForTyping()
+  }
 }
