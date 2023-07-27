@@ -1,11 +1,5 @@
-import { test as base, expect, type Page } from '@playwright/test'
-import {
-  step_answerBehaviouralQuestions,
-  step_answerPersonalQuestions,
-  step_inputPersonalInfo,
-  step_shareFeedback,
-  step_submitResponseAndRating,
-} from './aiChatbot-step-definitions'
+import { test as base } from '@playwright/test'
+import * as aiChatbotStep from './aiChatbot-step-definitions'
 import { AiChatbotPage } from './aiChatbotPage'
 
 const test = base.extend<{ aiChatbotPage: AiChatbotPage }>({
@@ -39,14 +33,33 @@ const personalAnswers = {
 
 const feedback = 'This is a feedback.'
 
+const behaviouralAnswerLessThan50Words = 'answer1 '.repeat(49)
+
 test.describe('ai interview chatbot', () => {
   test("I'm a candidate and complete an interview", async ({
     aiChatbotPage,
   }) => {
-    await step_inputPersonalInfo(aiChatbotPage, personalInfo)
-    await step_answerBehaviouralQuestions(aiChatbotPage, behaviouralAnswers)
-    await step_answerPersonalQuestions(aiChatbotPage, personalAnswers)
-    await step_submitResponseAndRating(aiChatbotPage)
-    await step_shareFeedback(aiChatbotPage, feedback)
+    await aiChatbotStep.step_inputPersonalInfo(aiChatbotPage, personalInfo)
+    await aiChatbotStep.step_answerBehaviouralQuestions(
+      aiChatbotPage,
+      behaviouralAnswers
+    )
+    await aiChatbotStep.step_answerPersonalQuestions(
+      aiChatbotPage,
+      personalAnswers
+    )
+    await aiChatbotStep.step_submitResponseAndRating(aiChatbotPage)
+    await aiChatbotStep.step_shareFeedback(aiChatbotPage, feedback)
+  })
+
+  test("I'm a candidate and answer the first behavioural question with less than 50 words", async ({
+    aiChatbotPage,
+  }) => {
+    await aiChatbotStep.step_inputPersonalInfo(aiChatbotPage, personalInfo)
+    await aiChatbotStep.step_answerFirstBehaviouralQuestion(
+      aiChatbotPage,
+      behaviouralAnswerLessThan50Words,
+      { isFail: true }
+    )
   })
 })

@@ -44,9 +44,15 @@ export class AiChatbotPage {
     await expect(this.textBubble.nth(-2)).toHaveText(text)
   }
 
-  async respond(text: string, textType?: TextType) {
+  async respond(
+    text: string,
+    options?: {
+      isFail?: boolean
+      textType?: TextType
+    }
+  ) {
     function isTextType(type: TextType) {
-      return !!textType && textType === type
+      return !!options?.textType && options?.textType === type
     }
     isTextType('email')
       ? await this.emailTextEditor.fill(text)
@@ -56,9 +62,13 @@ export class AiChatbotPage {
     isTextType('address')
       ? await this.page.locator('.option-item').getByText(text).click()
       : await this.sendButton.click()
-    const expectedText = isTextType('phone') ? `+61${text}` : text
-    await this.verifyLastText(expectedText)
-    await this.waitForTyping()
+    if (options?.isFail) {
+      await this.sendButton.isDisabled()
+    } else {
+      const expectedText = isTextType('phone') ? `+61${text}` : text
+      await this.verifyLastText(expectedText)
+      await this.waitForTyping()
+    }
   }
 
   async selectFromOptions(text: string) {
