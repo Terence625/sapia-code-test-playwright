@@ -44,9 +44,9 @@ test.describe('ai interview chatbot', () => {
     aiChatbotPage,
   }) => {
     await step_inputPersonalInfo(aiChatbotPage, personalInfo)
-    // await step_answerBehaviouralQuestions(aiChatbotPage, behaviouralAnswers)
-    // await step_answerPersonalQuestions(aiChatbotPage, personalAnswers)
-    // await step_submitResponseAndRating(aiChatbotPage)
-    // await step_shareFeedback(aiChatbotPage, feedback)
+    await step_answerBehaviouralQuestions(aiChatbotPage, behaviouralAnswers)
+    await step_answerPersonalQuestions(aiChatbotPage, personalAnswers)
+    await step_submitResponseAndRating(aiChatbotPage)
+    await step_shareFeedback(aiChatbotPage, feedback)
   })
 })
