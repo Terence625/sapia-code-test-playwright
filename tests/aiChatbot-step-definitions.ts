@@ -14,7 +14,7 @@ interface PersonalAnswers {
   ageGroup: string
 }
 
-export const step_inputPersonalInfo = async (
+export const step_input_my_personal_info = async (
   aiChatbotPage: AiChatbotPage,
   personalInfo: PersonalInfo
 ) => {
@@ -39,7 +39,7 @@ export const step_inputPersonalInfo = async (
   })
 }
 
-export const step_answerFirstBehaviouralQuestion = async (
+export const step_answer_first_behaviouralQuestion = async (
   aiChatbotPage: AiChatbotPage,
   answer: string,
   options?: {
@@ -54,7 +54,7 @@ export const step_answerFirstBehaviouralQuestion = async (
   })
 }
 
-export const step_answerSecondBehaviouralQuestion = async (
+export const step_answer_second_behaviouralQuestion = async (
   aiChatbotPage: AiChatbotPage,
   answer: string,
   options?: {
@@ -69,7 +69,7 @@ export const step_answerSecondBehaviouralQuestion = async (
   })
 }
 
-export const step_answerThirdBehaviouralQuestion = async (
+export const step_answer_third_behaviouralQuestion = async (
   aiChatbotPage: AiChatbotPage,
   answer: string,
   options?: {
@@ -84,7 +84,7 @@ export const step_answerThirdBehaviouralQuestion = async (
   })
 }
 
-export const step_answerFourthBehaviouralQuestion = async (
+export const step_answer_fourth_behaviouralQuestion = async (
   aiChatbotPage: AiChatbotPage,
   answer: string,
   options?: {
@@ -99,7 +99,7 @@ export const step_answerFourthBehaviouralQuestion = async (
   })
 }
 
-export const step_answerFifthBehaviouralQuestion = async (
+export const step_answer_fifth_behaviouralQuestion = async (
   aiChatbotPage: AiChatbotPage,
   answer: string,
   options?: {
@@ -114,18 +114,18 @@ export const step_answerFifthBehaviouralQuestion = async (
   })
 }
 
-export const step_answerBehaviouralQuestions = async (
+export const step_answer_behavioural_questions = async (
   aiChatbotPage: AiChatbotPage,
   answers: string[]
 ) => {
-  await step_answerFirstBehaviouralQuestion(aiChatbotPage, answers[0])
-  await step_answerSecondBehaviouralQuestion(aiChatbotPage, answers[1])
-  await step_answerThirdBehaviouralQuestion(aiChatbotPage, answers[2])
-  await step_answerFourthBehaviouralQuestion(aiChatbotPage, answers[3])
-  await step_answerFifthBehaviouralQuestion(aiChatbotPage, answers[4])
+  await step_answer_first_behaviouralQuestion(aiChatbotPage, answers[0])
+  await step_answer_second_behaviouralQuestion(aiChatbotPage, answers[1])
+  await step_answer_third_behaviouralQuestion(aiChatbotPage, answers[2])
+  await step_answer_fourth_behaviouralQuestion(aiChatbotPage, answers[3])
+  await step_answer_fifth_behaviouralQuestion(aiChatbotPage, answers[4])
 }
 
-export const step_answerPersonalQuestions = async (
+export const step_answer_personal_questions = async (
   aiChatbotPage: AiChatbotPage,
   answers: PersonalAnswers
 ) => {
@@ -141,7 +141,7 @@ export const step_answerPersonalQuestions = async (
   })
 }
 
-export const step_submitResponseAndRating = async (
+export const step_submit_response_and_rating = async (
   aiChatbotPage: AiChatbotPage
 ) => {
   await test.step('I submit my response and rating', async () => {
@@ -153,7 +153,7 @@ export const step_submitResponseAndRating = async (
   })
 }
 
-export const step_shareFeedback = async (
+export const step_share_feedback = async (
   aiChatbotPage: AiChatbotPage,
   feedback: string
 ) => {
@@ -167,3 +167,5 @@ export const step_shareFeedback = async (
     )
   })
 }
+
+// export const step_

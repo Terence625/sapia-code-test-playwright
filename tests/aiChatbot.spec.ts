@@ -39,24 +39,24 @@ test.describe('ai interview chatbot', () => {
   test("I'm a candidate and complete an interview", async ({
     aiChatbotPage,
   }) => {
-    await aiChatbotStep.step_inputPersonalInfo(aiChatbotPage, personalInfo)
-    await aiChatbotStep.step_answerBehaviouralQuestions(
+    await aiChatbotStep.step_input_my_personal_info(aiChatbotPage, personalInfo)
+    await aiChatbotStep.step_answer_behavioural_questions(
       aiChatbotPage,
       behaviouralAnswers
     )
-    await aiChatbotStep.step_answerPersonalQuestions(
+    await aiChatbotStep.step_answer_personal_questions(
       aiChatbotPage,
       personalAnswers
     )
-    await aiChatbotStep.step_submitResponseAndRating(aiChatbotPage)
-    await aiChatbotStep.step_shareFeedback(aiChatbotPage, feedback)
+    await aiChatbotStep.step_submit_response_and_rating(aiChatbotPage)
+    await aiChatbotStep.step_share_feedback(aiChatbotPage, feedback)
   })
 
   test("I'm a candidate and answer the first behavioural question with less than 50 words", async ({
     aiChatbotPage,
   }) => {
-    await aiChatbotStep.step_inputPersonalInfo(aiChatbotPage, personalInfo)
-    await aiChatbotStep.step_answerFirstBehaviouralQuestion(
+    await aiChatbotStep.step_input_my_personal_info(aiChatbotPage, personalInfo)
+    await aiChatbotStep.step_answer_first_behaviouralQuestion(
       aiChatbotPage,
       behaviouralAnswerLessThan50Words,
       { isFail: true }
