@@ -58,10 +58,9 @@ test.describe('ai interview chatbot', () => {
     aiChatbotPage,
   }) => {
     await aiChatbotStep.step_input_my_personal_info(aiChatbotPage, personalInfo)
-    await aiChatbotStep.step_answer_first_behaviouralQuestion(
+    await aiChatbotStep.step_answer_first_behavioural_question_with_less_than_50_words(
       aiChatbotPage,
-      behaviouralAnswerLessThan50Words,
-      { isFail: true }
+      behaviouralAnswerLessThan50Words
     )
     await aiChatbotStep.step_verify_alert_popup_and_edit(
       aiChatbotPage,
@@ -75,10 +74,9 @@ test.describe('ai interview chatbot', () => {
     aiChatbotPage,
   }) => {
     await aiChatbotStep.step_input_my_personal_info(aiChatbotPage, personalInfo)
-    await aiChatbotStep.step_answer_first_behaviouralQuestion(
+    await aiChatbotStep.step_answer_first_behavioural_question_with_more_than_150_words(
       aiChatbotPage,
-      behaviouralAnswerMoreThan150Words,
-      { isFail: true }
+      behaviouralAnswerMoreThan150Words
     )
     await aiChatbotStep.step_verify_alert_popup_and_continue(
       aiChatbotPage,
