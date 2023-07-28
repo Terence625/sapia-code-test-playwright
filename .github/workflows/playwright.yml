@@ -13,6 +13,12 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
+    - name: Cache Screenshots
+      id: cache-screenshots
+      uses: actions/cache@v3
+      with:
+        path: tests/*.ts-snapshots
+        key: ${{ runner.os }}-screenshots
     - name: Setup Pages
       uses: actions/configure-pages@v3
     - name: Install dependencies
