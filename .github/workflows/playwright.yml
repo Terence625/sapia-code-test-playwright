@@ -14,8 +14,8 @@ jobs:
       with:
         node-version: 18
     - name: Cache Screenshots
-      id: cache-screenshots
-      uses: actions/cache@v3
+      id: cache-screenshots-restore
+      uses: actions/cache/restore@v3
       with:
         path: tests/*.ts-snapshots
         key: ${{ runner.os }}-screenshots
@@ -27,6 +27,13 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test
+    - name: Save Screenshots
+      if: always()
+      id: cache-screenshots-save
+      uses: actions/cache/save@v3
+      with:
+        path: tests/*.ts-snapshots
+        key: ${{ steps.cache-screenshots-restore.outputs.cache-primary-key }}
     - name: Upload artifact
       if: always()
       uses: actions/upload-pages-artifact@v2
